@@ -7,6 +7,7 @@ import { t } from './i18n';
 import { readStoredLanguage, resolveLanguage } from './language';
 import { addDataLayers } from './layers/dataLayers';
 import { countByCategory, DataNotFoundError, loadLayerData, type LayerData } from './layers/data';
+import { addMarkerImages } from './layers/icons';
 import { createMap } from './map/createMap';
 import type { LabelLanguage } from './map/labels';
 import { RouteHighlight } from './routes/routeHighlight';
@@ -72,7 +73,10 @@ if (container) {
   const loading = showMessage(t(lang, 'loading'), 'loading');
 
   Promise.all([loadLayerData(config.dataUrl), mapLoaded])
-    .then(([data]) => setUpData(map, data))
+    .then(async ([data]) => {
+      await addMarkerImages(map);
+      setUpData(map, data);
+    })
     .catch((err: unknown) => {
       console.error(err);
       showMessage(err instanceof DataNotFoundError ? t(lang, 'dataMissing') : String(err));

@@ -54,6 +54,9 @@ importers:
         specifier: ^6.11.2
         version: 6.11.2
     devDependencies:
+      '@mapbox/maki':
+        specifier: ^8.2.0
+        version: 8.2.0
       '@types/geojson':
         specifier: ^7946.0.16
         version: 7946.0.16
@@ -427,6 +430,9 @@ packages:
   '@mapbox/jsonlint-lines-primitives@2.0.3':
     resolution: {integrity: sha512-0SElaV0uMxEnxzBhhX9WTuPyUeMsAN/SS0i16tjuba4/mio63MG9khjC1a0JAiPGXAwvwm4UfHJURCN7nyudQg==}
     engines: {node: '>= 22'}
+
+  '@mapbox/maki@8.2.0':
+    resolution: {integrity: sha512-sTd/fEBfkBSidVwwtbijHZYJC7NhqvgLrXzSRHgxbLi52x4IciyTVUufqvJr8oIChw7hT7MIBHu5fyqrrpfFdA==}
 
   '@mapbox/point-geometry@1.1.0':
     resolution: {integrity: sha512-YGcBz1cg4ATXDCM/71L9xveh4dynfGmcLDqufR+nQQy3fKwsAZsWd/x4621/6uJaeB9mwOHE6hPeDgXz9uViUQ==}
@@ -1722,6 +1728,8 @@ snapshots:
   '@keyv/serialize@1.1.1': {}
 
   '@mapbox/jsonlint-lines-primitives@2.0.3': {}
+
+  '@mapbox/maki@8.2.0': {}
 
   '@mapbox/point-geometry@1.1.0': {}
 

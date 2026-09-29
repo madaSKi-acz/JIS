@@ -9,6 +9,7 @@ import {
 import type { LabelLanguage } from '../map/labels';
 import { popupHtml } from '../ui/popup';
 import { CATEGORIES, FALLBACK_COLOR, GROUPS, type GroupId } from './categories';
+import { FALLBACK_ICON, iconImageId } from './icons';
 import {
   collection,
   filterByCategory,
@@ -33,6 +34,10 @@ const linesSource = (g: GroupId) => `jis-${g}-lines`;
 const clusterLayer = (g: GroupId) => `jis-${g}-clusters`;
 const pointLayer = (g: GroupId) => `jis-${g}-points`;
 const lineLayer = (g: GroupId) => `jis-${g}-lines`;
+const iconLayer = (g: GroupId) => `jis-${g}-icons`;
+
+/** Zoom where coloured dots turn into icon markers (clusters end at 13). */
+const ICON_MIN_ZOOM = 14;
 
 export interface DataLayers {
   setEnabledCategories(enabled: ReadonlySet<string>): void;
@@ -61,7 +66,7 @@ const LINE_OPACITY: ExpressionSpecification = [
 /** [layer, paint property, normal value, dimmed value] */
 type DimRule = [
   string,
-  'circle-opacity' | 'line-opacity' | 'text-opacity',
+  'circle-opacity' | 'line-opacity' | 'text-opacity' | 'icon-opacity',
   number | ExpressionSpecification,
   number,
 ];
@@ -72,6 +77,7 @@ function dimRules(g: GroupId): DimRule[] {
     [clusterLayer(g), 'circle-opacity', 0.85, 0.2],
     [`${clusterLayer(g)}-count`, 'text-opacity', 1, 0.2],
     [pointLayer(g), 'circle-opacity', 1, 0.2],
+    [iconLayer(g), 'icon-opacity', 1, 0.2],
     [`${pointLayer(g)}-labels`, 'text-opacity', 1, 0.2],
   ];
 }
@@ -140,6 +146,7 @@ export function addDataLayers(
       id: pointLayer(g),
       type: 'circle',
       source: pointsSource(g),
+      maxzoom: ICON_MIN_ZOOM,
       filter: ['!', ['has', 'point_count']],
       paint: {
         'circle-color': categoryColor,
@@ -149,16 +156,32 @@ export function addDataLayers(
       },
     });
     map.addLayer({
+      id: iconLayer(g),
+      type: 'symbol',
+      source: pointsSource(g),
+      minzoom: ICON_MIN_ZOOM,
+      filter: ['!', ['has', 'point_count']],
+      layout: {
+        'icon-image': [
+          'coalesce',
+          ['image', ['concat', iconImageId(''), ['get', 'category']]],
+          ['image', FALLBACK_ICON],
+        ],
+        'icon-allow-overlap': true,
+        'icon-ignore-placement': true,
+      },
+    });
+    map.addLayer({
       id: `${pointLayer(g)}-labels`,
       type: 'symbol',
       source: pointsSource(g),
-      minzoom: 14,
+      minzoom: ICON_MIN_ZOOM,
       filter: ['!', ['has', 'point_count']],
       layout: {
         'text-field': ['coalesce', ['get', lang === 'km' ? 'name_km' : 'name_en'], ['get', 'name']],
         'text-font': ['Noto Sans Regular'],
         'text-size': 12,
-        'text-offset': [0, 1.1],
+        'text-offset': [0, 1.3],
         'text-anchor': 'top',
         'text-optional': true,
       },
@@ -196,7 +219,7 @@ function addInteractions(map: MapLibreMap, lang: LabelLanguage, options: DataLay
   const popup = new Popup({ maxWidth: '300px', closeButton: true });
   // Checked in this order, so a marker wins over a route drawn underneath it.
   const clusters = GROUPS.map((g) => clusterLayer(g.id));
-  const points = GROUPS.map((g) => pointLayer(g.id));
+  const points = GROUPS.flatMap((g) => [iconLayer(g.id), pointLayer(g.id)]);
   const lines = GROUPS.map((g) => lineLayer(g.id));
   const clickable = [...clusters, ...points, ...lines];
 

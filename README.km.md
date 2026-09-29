@@ -45,3 +45,4 @@ pnpm dev
 
 - **កូដ៖** [MIT](LICENSE)
 - **ទិន្នន័យផែនទី៖** © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright) ក្រោមអាជ្ញាប័ណ្ណ [ODbL](https://opendatacommons.org/licenses/odbl/)
+- **រូបតំណាង៖** [Maki](https://github.com/mapbox/maki) ដោយ Mapbox ក្រោមអាជ្ញាប័ណ្ណ [CC0](https://creativecommons.org/publicdomain/zero/1.0/)

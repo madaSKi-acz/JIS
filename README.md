@@ -76,3 +76,4 @@ Found a wrong or missing place? Please fix it in OpenStreetMap: [docs/fix-data-i
 - **Code:** [MIT](LICENSE)
 - **Map data:** © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/)
 - **Base map tiles:** [OpenFreeMap](https://openfreemap.org)
+- **Icons:** [Maki](https://github.com/mapbox/maki) by Mapbox, [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
