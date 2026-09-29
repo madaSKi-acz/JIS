@@ -5,3 +5,5 @@ data/raw/
 data/out/
 apps/web/public/data/
 pnpm-lock.yaml
+# Generated boundary (Natural Earth), kept on one line
+apps/web/src/map/cambodia.json
