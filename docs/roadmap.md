@@ -10,7 +10,7 @@
 | **M3 – Layers**               | Tourism and transport points, icons, popups, layer toggles                              | ✅ Done |
 | **Bus lines**                 | Pick a bus line to highlight its route and ordered stops                                | ✅ Done |
 | **M4 – Language & polish**    | Khmer/English switch, Noto Sans Khmer, mobile layout                                    | ✅ Done |
-| **M5 – Open to contributors** | Labels, `good first issue`s, release `v1.0.0`                                           | ⏳ Next |
+| **M5 – Open to contributors** | Labels, `good first issue`s, release `v1.0.0`                                           | ✅ Done |
 
 ### v1 is done when
 

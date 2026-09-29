@@ -1,6 +1,7 @@
 {
   "name": "jis",
   "private": true,
+  "version": "1.0.0",
   "description": "Open-source tourism and transport map of Cambodia built on OpenStreetMap",
   "license": "MIT",
   "type": "module",
