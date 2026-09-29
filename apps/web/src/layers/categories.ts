@@ -23,7 +23,7 @@ export const CATEGORIES: Category[] = [
     group: 'tourism',
     color: '#92400e',
     icon: 'monument',
-    label: { km: 'បេតិកភណ្ឌ', en: 'Heritage site' },
+    label: { km: 'តំបន់បេតិកភណ្ឌ', en: 'Heritage site' },
   },
   {
     id: 'temple',
@@ -44,7 +44,7 @@ export const CATEGORIES: Category[] = [
     group: 'tourism',
     color: '#e11d48',
     icon: 'attraction',
-    label: { km: 'កន្លែងទេសចរណ៍', en: 'Attraction' },
+    label: { km: 'រមណីយដ្ឋាន', en: 'Attraction' },
   },
   {
     id: 'viewpoint',
@@ -99,7 +99,7 @@ export const CATEGORIES: Category[] = [
     id: 'bus_route',
     group: 'transport',
     color: '#2563eb',
-    label: { km: 'ខ្សែរត់ឡានក្រុង', en: 'Bus route' },
+    label: { km: 'ខ្សែឡានក្រុង', en: 'Bus route' },
   },
   {
     id: 'ferry_route',
