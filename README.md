@@ -4,7 +4,7 @@
 
 An open-source web map of Cambodia focused on **tourism** and **public transport**, built on free [OpenStreetMap](https://www.openstreetmap.org) data. Started as a self-study project, built to grow, and open to contributions from the Khmer developer community.
 
-> Status: **v1 in progress** — foundation (M0) and data pipeline (M1) are done. See the [roadmap](docs/roadmap.md).
+> Status: **v1 in progress** — foundation (M0), data pipeline (M1) and base map (M2) are done. See the [roadmap](docs/roadmap.md).
 
 ## Features (v1 goal)
 
@@ -27,7 +27,7 @@ pnpm data:build   # download + build map data (see data/README.md)
 pnpm dev
 ```
 
-Then open http://localhost:5173.
+Then open http://localhost:5173. Map labels are in Khmer by default; add `?lang=en` to the URL for English (a proper switch comes in M4).
 
 Map data is **not stored in this repo**. `pnpm data:build` generates it locally from OpenStreetMap. See [data/README.md](data/README.md).
 
@@ -46,7 +46,7 @@ Map data is **not stored in this repo**. `pnpm data:build` generates it locally 
 ## Project structure
 
 ```
-apps/web/     the map app (TypeScript + Vite, MapLibre from M2)
+apps/web/     the map app (TypeScript + Vite + MapLibre)
 data/         scripts that build map data from OSM (output is gitignored)
 docs/         architecture, data sources, guides
 scripts/      repo tooling (e.g. large-file check)

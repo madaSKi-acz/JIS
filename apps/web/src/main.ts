@@ -1,16 +1,13 @@
+import 'maplibre-gl/dist/maplibre-gl.css';
+import '@fontsource/noto-sans-khmer/400.css';
 import './style.css';
 import { loadConfig } from './config';
+import { createMap } from './map/createMap';
+import type { LabelLanguage } from './map/labels';
 
 const config = loadConfig(import.meta.env);
-const app = document.querySelector<HTMLDivElement>('#app');
+const lang: LabelLanguage = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'km';
+document.documentElement.lang = lang;
 
-if (app) {
-  app.innerHTML = `
-    <main class="placeholder">
-      <h1>JIS</h1>
-      <p lang="km">ផែនទីទេសចរណ៍ និងការដឹកជញ្ជូននៅកម្ពុជា</p>
-      <p lang="en">Cambodia tourism &amp; transport map — coming soon.</p>
-    </main>
-  `;
-  console.info('JIS config', config);
-}
+const container = document.querySelector<HTMLDivElement>('#map');
+if (container) createMap(container, config, lang);

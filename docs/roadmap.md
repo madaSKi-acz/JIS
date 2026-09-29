@@ -6,8 +6,8 @@
 | ----------------------------- | --------------------------------------------------------------------------------------- | ------- |
 | **M0 – Foundation**           | Repo structure, tooling, CI, licenses, docs                                             | ✅ Done |
 | **M1 – Data pipeline**        | `pnpm data:build`: Geofabrik extract → filtered `tourism.geojson` / `transport.geojson` | ✅ Done |
-| **M2 – Base map**             | MapLibre + OpenFreeMap; test Khmer label rendering early                                | ⏳ Next |
-| **M3 – Layers**               | Tourism and transport points, icons, popups, layer toggles                              |         |
+| **M2 – Base map**             | MapLibre + OpenFreeMap; test Khmer label rendering early                                | ✅ Done |
+| **M3 – Layers**               | Tourism and transport points, icons, popups, layer toggles                              | ⏳ Next |
 | **M4 – Language & polish**    | Khmer/English switch, Noto Sans Khmer, mobile layout                                    |         |
 | **M5 – Open to contributors** | Labels, `good first issue`s, release `v1.0.0`                                           |         |
 

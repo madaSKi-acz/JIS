@@ -4,14 +4,13 @@
   background: #f9fafb;
 }
 
+html,
 body {
+  height: 100%;
   margin: 0;
 }
 
-.placeholder {
-  display: grid;
-  place-content: center;
-  min-height: 100vh;
-  padding: 0 16px;
-  text-align: center;
+#map {
+  position: fixed;
+  inset: 0;
 }
