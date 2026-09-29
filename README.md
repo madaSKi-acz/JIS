@@ -33,6 +33,8 @@ pnpm dev
 
 Then open http://localhost:5173. The map is in Khmer by default; use the **ខ្មែរ | EN** button at the top right to switch.
 
+On Windows? There is a step-by-step guide in Khmer: [docs/setup.km.md](docs/setup.km.md).
+
 Map data is **not stored in this repo**. `pnpm data:build` generates it locally from OpenStreetMap. See [data/README.md](data/README.md).
 
 ## Scripts
