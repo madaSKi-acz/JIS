@@ -1,6 +1,14 @@
 import type { Feature, FeatureCollection, Geometry } from 'geojson';
 import type { GroupId } from './categories';
 
+export interface RouteStop {
+  id: string;
+  name?: string;
+  name_km?: string;
+  name_en?: string;
+  coordinates: [number, number];
+}
+
 export interface PlaceProperties {
   id: string;
   category: string;
@@ -14,6 +22,9 @@ export interface PlaceProperties {
   ref?: string;
   from?: string;
   to?: string;
+  network?: string;
+  /** Ordered stops, only on route features. */
+  stops?: RouteStop[];
 }
 
 export type PlaceFeature = Feature<Geometry, PlaceProperties>;

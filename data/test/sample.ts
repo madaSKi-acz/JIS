@@ -23,6 +23,13 @@ export const SAMPLE: OsmElement[] = [
     lon: 104.94,
     tags: { amenity: 'cafe', name: 'Not on the map' },
   },
+  {
+    type: 'node',
+    id: 5,
+    lat: 11.561,
+    lon: 104.921,
+    tags: { public_transport: 'platform', name: 'Platform A', 'name:km': 'ចំណត A' },
+  },
   { type: 'node', id: 10, lat: 11.0, lon: 104.0 },
   { type: 'node', id: 11, lat: 11.0, lon: 104.002 },
   { type: 'node', id: 12, lat: 11.002, lon: 104.002 },
@@ -48,6 +55,17 @@ export const SAMPLE: OsmElement[] = [
       { type: 'node', ref: 3, role: 'stop' },
     ],
     tags: { type: 'route', route: 'bus', name: 'Line 1', ref: '1' },
+  },
+  {
+    type: 'relation',
+    id: 1004,
+    members: [
+      { type: 'node', ref: 2, role: 'stop' },
+      { type: 'node', ref: 5, role: 'platform' },
+      { type: 'way', ref: 101, role: '' },
+      { type: 'node', ref: 3, role: 'stop' },
+    ],
+    tags: { type: 'route', route: 'bus', name: 'Line 2', ref: '2' },
   },
   {
     type: 'relation',

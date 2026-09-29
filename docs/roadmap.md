@@ -8,6 +8,7 @@
 | **M1 – Data pipeline**        | `pnpm data:build`: Geofabrik extract → filtered `tourism.geojson` / `transport.geojson` | ✅ Done |
 | **M2 – Base map**             | MapLibre + OpenFreeMap; test Khmer label rendering early                                | ✅ Done |
 | **M3 – Layers**               | Tourism and transport points, icons, popups, layer toggles                              | ✅ Done |
+| **Bus lines**                 | Pick a bus line to highlight its route and ordered stops                                | ✅ Done |
 | **M4 – Language & polish**    | Khmer/English switch, Noto Sans Khmer, mobile layout                                    | ⏳ Next |
 | **M5 – Open to contributors** | Labels, `good first issue`s, release `v1.0.0`                                           |         |
 
@@ -21,3 +22,5 @@
 ## Later (not in v1)
 
 Search, routing/directions (OSRM or Valhalla), a backend/database, offline mode, more countries.
+
+**Live bus positions.** OpenStreetMap only has routes and stops, not where buses are right now. Showing moving buses needs a real-time GPS feed from the bus operator (usually GTFS-Realtime) and a small server to relay it. The bus line view is built so a live vehicle layer can be added on top once such a feed is available.

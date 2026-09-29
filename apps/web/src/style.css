@@ -29,18 +29,19 @@ body {
   z-index: 10;
 }
 
-/* Layer panel */
-.layer-panel {
+/* Panels (layer panel, bus lines) */
+.map-panel {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 0 2px rgb(0 0 0 / 10%);
   font-size: 14px;
+  width: 280px;
   max-width: calc(100vw - 32px);
   max-height: calc(100vh - 120px);
   overflow-y: auto;
 }
 
-.layer-panel summary {
+.map-panel summary {
   cursor: pointer;
   font-weight: 600;
   padding: 8px 12px;
@@ -131,4 +132,116 @@ body {
   display: inline-block;
   margin-top: 8px;
   font-size: 12px;
+}
+
+/* Bus lines */
+.route-panel-body {
+  border-top: 1px solid #e5e7eb;
+  padding: 8px 12px 10px;
+}
+
+.route-search {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.route-list,
+.route-stop-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+
+.route-item,
+.route-stop,
+.route-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 4px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.route-item:hover,
+.route-stop:hover,
+.route-back:hover {
+  background: #f3f4f6;
+}
+
+.route-back {
+  color: #1d4ed8;
+  margin-bottom: 6px;
+}
+
+.route-badge {
+  flex: none;
+  min-width: 28px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #1d4ed8;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}
+
+.route-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.route-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.route-subtitle {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.route-stops {
+  margin-top: 10px;
+}
+
+.route-stops-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.route-stop-list {
+  counter-reset: stop;
+}
+
+.route-stop::before {
+  counter-increment: stop;
+  content: counter(stop);
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #1d4ed8;
+  border-radius: 50%;
+  color: #1d4ed8;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+}
+
+.route-empty {
+  color: #6b7280;
+  font-size: 13px;
+  margin: 6px 0 0;
 }

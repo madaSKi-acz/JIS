@@ -2,7 +2,12 @@ import type { Feature, FeatureCollection, MultiLineString, Point } from 'geojson
 import { LAYER_RULES, type LayerId, type LayerRule } from '../../config/layers.ts';
 import { classify } from './classify.ts';
 import { centerOf, roundCoord, type LonLat } from './geometry.ts';
-import { buildProperties, type FeatureProperties } from './properties.ts';
+import {
+  buildProperties,
+  namesFrom,
+  type FeatureProperties,
+  type RouteStop,
+} from './properties.ts';
 import type { ElementSource, OsmRelation, OsmWay } from './types.ts';
 
 export type LayerFeature = Feature<Point | MultiLineString, FeatureProperties>;
@@ -29,6 +34,20 @@ function geometryWays(relation: OsmRelation, rule: LayerRule): number[] {
     .map((m) => m.ref);
 }
 
+const PLATFORM_ROLE = /^platform/;
+const STOP_ROLE = /^stop/;
+
+/**
+ * A route usually lists each stop twice: the stop position on the road and the platform beside
+ * it. Use platforms when the route has any, otherwise stop positions, so each stop appears once.
+ */
+export function routeStopIds(relation: OsmRelation): number[] {
+  const nodes = relation.members.filter((m) => m.type === 'node');
+  const platforms = nodes.filter((m) => PLATFORM_ROLE.test(m.role));
+  const chosen = platforms.length > 0 ? platforms : nodes.filter((m) => STOP_ROLE.test(m.role));
+  return chosen.map((m) => m.ref).filter((id, i, ids) => id !== ids[i - 1]);
+}
+
 /**
  * Reads the source three times (relations, then ways, then nodes) so that only the
  * node coordinates actually needed are kept in memory.
@@ -39,12 +58,14 @@ export async function extractLayers(
 ): Promise<ExtractResult> {
   const relations: Matched<OsmRelation>[] = [];
   const neededWays = new Set<number>();
+  const stopNodes = new Set<number>();
   for await (const el of source()) {
     if (el.type !== 'relation') continue;
     const rule = classify(el, rules);
     if (!rule) continue;
     relations.push({ element: el, rule });
     for (const id of geometryWays(el, rule)) neededWays.add(id);
+    if (rule.kind === 'route') for (const id of routeStopIds(el)) stopNodes.add(id);
   }
 
   const ways: Matched<OsmWay>[] = [];
@@ -73,9 +94,17 @@ export async function extractLayers(
   const point = (coordinates: LonLat): Point => ({ type: 'Point', coordinates });
 
   const nodeCoords = new Map<number, LonLat>();
+  const stops = new Map<number, RouteStop>();
   for await (const el of source()) {
     if (el.type !== 'node') continue;
     if (neededNodes.has(el.id)) nodeCoords.set(el.id, [el.lon, el.lat]);
+    if (stopNodes.has(el.id)) {
+      stops.set(el.id, {
+        id: `node/${el.id}`,
+        ...namesFrom(el.tags ?? {}),
+        coordinates: roundCoord([el.lon, el.lat]),
+      });
+    }
     const rule = classify(el, rules);
     if (rule && el.tags) {
       add(
@@ -137,10 +166,12 @@ export async function extractLayers(
       skipped++;
       continue;
     }
-    add(
-      { type: 'Feature', geometry, properties: buildProperties(element, rule, element.tags) },
-      rule,
-    );
+    const properties = buildProperties(element, rule, element.tags);
+    if (rule.kind === 'route') {
+      const routeStops = routeStopIds(element).flatMap((id) => stops.get(id) ?? []);
+      if (routeStops.length > 0) properties.stops = routeStops;
+    }
+    add({ type: 'Feature', geometry, properties }, rule);
   }
 
   return { layers, counts, skipped };

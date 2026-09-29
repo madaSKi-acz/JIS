@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { SAMPLE } from '../../test/sample.ts';
 import { writePbf } from '../../test/make-pbf.ts';
-import { extractLayers, type ExtractResult } from './extract.ts';
+import { extractLayers, routeStopIds, type ExtractResult } from './extract.ts';
 import { pbfSource, readPbfTimestamp } from './pbf.ts';
 
 const byId = (result: ExtractResult, id: string) =>
@@ -18,7 +18,7 @@ function checkSample(result: ExtractResult) {
     'tourism/temple': 1,
     'tourism/heritage': 1,
     'transport/bus_stop': 2,
-    'transport/bus_route': 1,
+    'transport/bus_route': 2,
     'transport/ferry_route': 1,
     'transport/railway': 1,
   });
@@ -54,8 +54,19 @@ function checkSample(result: ExtractResult) {
         ],
       ],
     },
-    properties: { category: 'bus_route', name: 'Line 1', ref: '1' },
+    properties: {
+      category: 'bus_route',
+      name: 'Line 1',
+      ref: '1',
+      stops: [
+        { id: 'node/2', name: 'Stop A', coordinates: [104.92, 11.56] },
+        { id: 'node/3', coordinates: [104.93, 11.57] },
+      ],
+    },
   });
+  expect(byId(result, 'relation/1004')?.properties.stops).toEqual([
+    { id: 'node/5', name: 'Platform A', name_km: 'ចំណត A', coordinates: [104.921, 11.561] },
+  ]);
   expect(byId(result, 'way/103')).toMatchObject({
     geometry: {
       type: 'MultiLineString',
@@ -71,6 +82,40 @@ function checkSample(result: ExtractResult) {
   expect(byId(result, 'way/105')).toBeUndefined();
   expect(byId(result, 'node/4')).toBeUndefined();
 }
+
+describe('routeStopIds', () => {
+  const route = (members: [string, number][]) => ({
+    type: 'relation' as const,
+    id: 1,
+    members: members.map(([role, ref]) => ({ type: 'node' as const, ref, role })),
+  });
+
+  it('prefers platforms over stop positions', () => {
+    expect(
+      routeStopIds(
+        route([
+          ['stop', 1],
+          ['platform', 2],
+          ['stop', 3],
+          ['platform_exit_only', 4],
+        ]),
+      ),
+    ).toEqual([2, 4]);
+  });
+
+  it('falls back to stop positions and drops repeated neighbours', () => {
+    expect(
+      routeStopIds(
+        route([
+          ['stop_entry_only', 1],
+          ['stop', 1],
+          ['', 9],
+          ['stop', 3],
+        ]),
+      ),
+    ).toEqual([1, 3]);
+  });
+});
 
 describe('extractLayers', () => {
   it('builds layers from in-memory elements', async () => {

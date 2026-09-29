@@ -47,6 +47,8 @@ Feature properties:
 | `name_km`, `name_en`                                                                         | from `name:km`, `name:en` |
 | `opening_hours`, `website`, `phone`, `operator`, `ref`, `network`, `from`, `to`, `wikipedia` | when present              |
 
+Bus, ferry and train routes also get `stops`: an ordered list of `{ id, name, name_km, name_en, coordinates }` taken from the route's platform members (or its stop positions when it has no platforms).
+
 `meta.json` holds the data date, source and feature counts per category.
 
 ## Changing what's on the map

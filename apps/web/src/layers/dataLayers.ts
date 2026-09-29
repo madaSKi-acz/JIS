@@ -35,9 +35,34 @@ const lineLayer = (g: GroupId) => `jis-${g}-lines`;
 
 export interface DataLayers {
   setEnabledCategories(enabled: ReadonlySet<string>): void;
+  /** Fades all data layers, e.g. while one bus route is highlighted on top. */
+  setDimmed(dimmed: boolean): void;
 }
 
-export function addDataLayers(map: MapLibreMap, data: LayerData, lang: LabelLanguage): DataLayers {
+export interface DataLayerOptions {
+  /** Called instead of opening a popup when a bus route line is clicked. */
+  onRouteClick?: (routeId: string) => void;
+}
+
+/** [layer, paint property, normal value, dimmed value] */
+type DimRule = [string, 'circle-opacity' | 'line-opacity' | 'text-opacity', number, number];
+
+function dimRules(g: GroupId): DimRule[] {
+  return [
+    [lineLayer(g), 'line-opacity', 0.8, 0.12],
+    [clusterLayer(g), 'circle-opacity', 0.85, 0.2],
+    [`${clusterLayer(g)}-count`, 'text-opacity', 1, 0.2],
+    [pointLayer(g), 'circle-opacity', 1, 0.2],
+    [`${pointLayer(g)}-labels`, 'text-opacity', 1, 0.2],
+  ];
+}
+
+export function addDataLayers(
+  map: MapLibreMap,
+  data: LayerData,
+  lang: LabelLanguage,
+  options: DataLayerOptions = {},
+): DataLayers {
   const split = Object.fromEntries(
     GROUPS.map((g) => [g.id, splitByGeometry(data[g.id])]),
   ) as Record<GroupId, { points: PlaceFeature[]; lines: PlaceFeature[] }>;
@@ -122,7 +147,7 @@ export function addDataLayers(map: MapLibreMap, data: LayerData, lang: LabelLang
     });
   }
 
-  addInteractions(map, lang);
+  addInteractions(map, lang, options);
 
   return {
     setEnabledCategories(enabled) {
@@ -135,10 +160,17 @@ export function addDataLayers(map: MapLibreMap, data: LayerData, lang: LabelLang
         );
       }
     },
+    setDimmed(dimmed) {
+      for (const { id: g } of GROUPS) {
+        for (const [layer, property, normal, dim] of dimRules(g)) {
+          map.setPaintProperty(layer, property, dimmed ? dim : normal);
+        }
+      }
+    },
   };
 }
 
-function addInteractions(map: MapLibreMap, lang: LabelLanguage) {
+function addInteractions(map: MapLibreMap, lang: LabelLanguage, options: DataLayerOptions) {
   const popup = new Popup({ maxWidth: '300px', closeButton: true });
   // Checked in this order, so a marker wins over a route drawn underneath it.
   const clusters = GROUPS.map((g) => clusterLayer(g.id));
@@ -158,12 +190,16 @@ function addInteractions(map: MapLibreMap, lang: LabelLanguage) {
       return;
     }
 
+    const props = hit.properties as PlaceProperties;
+    if (options.onRouteClick && props.category === 'bus_route') {
+      popup.remove();
+      options.onRouteClick(props.id);
+      return;
+    }
+
     const at =
       hit.geometry.type === 'Point' ? (hit.geometry.coordinates as [number, number]) : e.lngLat;
-    popup
-      .setLngLat(at)
-      .setHTML(popupHtml(hit.properties as PlaceProperties, lang))
-      .addTo(map);
+    popup.setLngLat(at).setHTML(popupHtml(props, lang)).addTo(map);
   });
 
   for (const layer of clickable) {

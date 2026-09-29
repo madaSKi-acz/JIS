@@ -29,7 +29,7 @@ export class LayerPanel implements IControl {
 
   onAdd(): HTMLElement {
     const details = document.createElement('details');
-    details.className = 'maplibregl-ctrl layer-panel';
+    details.className = 'maplibregl-ctrl map-panel layer-panel';
     details.open = window.matchMedia('(min-width: 640px)').matches;
 
     const summary = document.createElement('summary');
