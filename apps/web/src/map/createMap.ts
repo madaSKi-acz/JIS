@@ -8,6 +8,7 @@ import { LanguageSwitch } from '../ui/languageSwitch';
 import { khmerFontFaces, textFontNames } from './fonts';
 import { labelExpression, nameLabelLayerIds, type LabelLanguage } from './labels';
 import { addOutsideMask } from './outsideMask';
+import { basemapPoiChanges } from './basemapPois';
 
 /** Fonts used by our own data layers (see layers/dataLayers.ts). */
 const DATA_LAYER_FONTS = ['Noto Sans Regular', 'Noto Sans Bold'];
@@ -47,6 +48,9 @@ export function createMap(
     for (const id of nameLabelLayerIds(layers)) {
       map.setLayoutProperty(id, 'text-field', labelExpression(lang));
     }
+    const pois = basemapPoiChanges(layers);
+    for (const id of pois.hide) map.setLayoutProperty(id, 'visibility', 'none');
+    for (const [id, filter] of Object.entries(pois.filters)) map.setFilter(id, filter);
     addOutsideMask(map);
   });
 
