@@ -6,7 +6,9 @@ An open-source web map of Cambodia focused on **tourism** and **public transport
 
 > Status: **v1.0.0** — see the [changelog](CHANGELOG.md) and [roadmap](docs/roadmap.md). New here? Look for issues labelled [`good first issue`](https://github.com/madaSKi-acz/JIS/labels/good%20first%20issue).
 
-## Features (v1 goal)
+**Live map:** https://madaski-acz.github.io/JIS/
+
+## Features
 
 - Map of Cambodia with tourist attractions, hotels, temples, museums and viewpoints
 - Transport layer: bus stops, stations, ferry terminals, airports and bus routes
@@ -55,6 +57,12 @@ scripts/      repo tooling (e.g. large-file check)
 ```
 
 More detail: [docs/architecture.md](docs/architecture.md).
+
+## Deployment
+
+The live map is hosted for free on GitHub Pages by [`.github/workflows/pages.yml`](.github/workflows/pages.yml). It rebuilds the data from OpenStreetMap and redeploys on every push to `main`, every Monday, and on demand (**Actions → Deploy map → Run workflow**).
+
+It costs nothing for a public repository. To pause updates, disable the workflow in the **Actions** tab; to take the site offline, use **Settings → Pages → Unpublish site**.
 
 ## Contributing
 
