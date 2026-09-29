@@ -1,0 +1,20 @@
+name: Bug report / រាយការណ៍កំហុស
+description: Something in the app is broken
+labels: [bug]
+body:
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the map
+        2. Click on ...
+  - type: input
+    attributes:
+      label: Browser and device
+      placeholder: Chrome on Android, Firefox on Windows...

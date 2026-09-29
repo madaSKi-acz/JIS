@@ -1,0 +1,20 @@
+{
+  "name": "@jis/data",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "osm-pbf-parser-node": "^1.1.4"
+  },
+  "devDependencies": {
+    "@osmix/pbf": "^0.0.10",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Wrong or missing place on the map? Fix it in OpenStreetMap
+    url: https://www.openstreetmap.org/edit
+    about: Map data comes from OpenStreetMap. Fixing it there helps everyone. See docs/fix-data-in-osm.md.

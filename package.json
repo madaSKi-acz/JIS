@@ -1,0 +1,49 @@
+{
+  "name": "jis",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Open-source tourism and transport map of Cambodia built on OpenStreetMap",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @jis/web dev",
+    "build": "pnpm --filter @jis/web build",
+    "preview": "pnpm --filter @jis/web preview",
+    "data:build": "pnpm --filter @jis/data build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:large-files": "node scripts/check-large-files.mjs",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm check:large-files",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,css,html}": "prettier --write"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.12.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.2"
+  }
+}
