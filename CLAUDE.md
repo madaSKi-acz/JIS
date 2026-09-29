@@ -9,6 +9,14 @@ Guidance for Claude Code sessions working in this repo.
 - Commit and push to `origin develop`.
 - Never push directly to `main`. `main` is updated only by merging a PR from `develop` when a milestone is done.
 
+## Commit attribution
+
+End every commit message with this co-author line (instead of a Claude co-author line):
+
+```
+Co-Authored-By: sok dev <soknhok10@gmail.com>
+```
+
 ## Project
 
 Open-source tourism and transport map of Cambodia on OpenStreetMap. See `README.md`, `docs/architecture.md` and `docs/roadmap.md` (milestones M0–M5).
