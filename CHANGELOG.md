@@ -14,6 +14,7 @@ All notable changes to this project are listed here. The format follows [Keep a 
 
 ### Changed
 
+- The base map no longer shows its own icons for temples, hotels, museums, attractions, stations and airports, so they aren't confused with our markers. Its other icons (shops, restaurants, ...) stay.
 - Clearer Khmer wording for some categories and messages (តំបន់បេតិកភណ្ឌ, រមណីយដ្ឋាន, ខ្សែឡានក្រុង).
 
 ## [1.0.0] – 2026-09-29
