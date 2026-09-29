@@ -1,0 +1,12 @@
+name: Feature request / សំណើមុខងារ
+description: Suggest an idea for the map
+labels: [enhancement]
+body:
+  - type: textarea
+    attributes:
+      label: What problem would this solve?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Your idea

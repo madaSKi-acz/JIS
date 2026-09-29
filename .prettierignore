@@ -1,0 +1,7 @@
+node_modules/
+dist/
+coverage/
+data/raw/
+data/out/
+apps/web/public/data/
+package-lock.json
