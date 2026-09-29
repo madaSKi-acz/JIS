@@ -4,7 +4,7 @@
 
 An open-source web map of Cambodia focused on **tourism** and **public transport**, built on free [OpenStreetMap](https://www.openstreetmap.org) data. Started as a self-study project, built to grow, and open to contributions from the Khmer developer community.
 
-> Status: **v1 in progress** — foundation (M0), data pipeline (M1) and base map (M2) are done. See the [roadmap](docs/roadmap.md).
+> Status: **v1 in progress** — M0–M3 are done: data pipeline, base map, and tourism/transport layers with popups. See the [roadmap](docs/roadmap.md).
 
 ## Features (v1 goal)
 

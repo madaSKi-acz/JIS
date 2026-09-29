@@ -51,4 +51,4 @@ Feature properties:
 
 ## Changing what's on the map
 
-Edit the rules in [`config/layers.ts`](config/layers.ts), add a test in `scripts/lib/classify.test.ts`, and run `pnpm data:build`. If a place is **missing or wrong in OSM itself**, fix it in OpenStreetMap instead: [docs/fix-data-in-osm.md](../docs/fix-data-in-osm.md).
+Edit the rules in [`config/layers.ts`](config/layers.ts), add a test in `scripts/lib/classify.test.ts`, and run `pnpm data:build`. A **new category** also needs a colour and Khmer/English name in [`apps/web/src/layers/categories.ts`](../apps/web/src/layers/categories.ts); a test fails until it has one. If a place is **missing or wrong in OSM itself**, fix it in OpenStreetMap instead: [docs/fix-data-in-osm.md](../docs/fix-data-in-osm.md).

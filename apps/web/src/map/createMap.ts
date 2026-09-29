@@ -7,6 +7,9 @@ import type { AppConfig } from '../config';
 import { khmerFontFaces, textFontNames } from './fonts';
 import { labelExpression, nameLabelLayerIds, type LabelLanguage } from './labels';
 
+/** Fonts used by our own data layers (see layers/dataLayers.ts). */
+const DATA_LAYER_FONTS = ['Noto Sans Regular', 'Noto Sans Bold'];
+
 const CAMBODIA_CENTER: [number, number] = [104.9, 12.6];
 const CAMBODIA_BOUNDS: [[number, number], [number, number]] = [
   [100.5, 8.5],
@@ -36,9 +39,8 @@ export function createMap(
 
   map.once('style.load', () => {
     const layers = map.getStyle().layers;
-    map.setFontFaces(
-      khmerFontFaces(textFontNames(layers), { regular: khmerRegular, bold: khmerBold }),
-    );
+    const fontNames = new Set([...textFontNames(layers), ...DATA_LAYER_FONTS]);
+    map.setFontFaces(khmerFontFaces([...fontNames], { regular: khmerRegular, bold: khmerBold }));
     for (const id of nameLabelLayerIds(layers)) {
       map.setLayoutProperty(id, 'text-field', labelExpression(lang));
     }

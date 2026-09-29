@@ -14,3 +14,121 @@ body {
   position: fixed;
   inset: 0;
 }
+
+.map-message {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #fef2f2;
+  color: #991b1b;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  z-index: 10;
+}
+
+/* Layer panel */
+.layer-panel {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 10%);
+  font-size: 14px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.layer-panel summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 8px 12px;
+}
+
+.layer-panel fieldset {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 0;
+  padding: 6px 12px 8px;
+}
+
+.layer-panel label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.layer-panel .layer-group {
+  font-weight: 600;
+}
+
+.layer-panel .layer-category {
+  padding-left: 20px;
+}
+
+.layer-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.layer-name {
+  flex: 1;
+}
+
+.layer-count {
+  color: #6b7280;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* MapLibre sets its own font on the map; replace it so Khmer is shaped everywhere. */
+.maplibregl-map {
+  font-family: 'Noto Sans Khmer', system-ui, sans-serif;
+}
+
+/* Popup */
+.maplibregl-popup-content {
+  padding: 12px 14px;
+}
+
+.popup-category {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.popup-title {
+  margin: 2px 0 0;
+  font-size: 16px;
+}
+
+.popup-subtitle {
+  color: #374151;
+}
+
+.popup dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 8px;
+  margin: 8px 0 0;
+  font-size: 13px;
+}
+
+.popup dt {
+  color: #6b7280;
+}
+
+.popup dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.popup-osm {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 12px;
+}
