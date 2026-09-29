@@ -17,4 +17,8 @@ describe('loadConfig', () => {
     expect(config.dataUrl).toBe('https://example.org/jis-data');
     expect(config.basemapStyleUrl).toBe('https://example.org/style.json');
   });
+
+  it('puts data next to the app when it is served from a sub-path', () => {
+    expect(loadConfig({ BASE_URL: '/JIS/' }).dataUrl).toBe('/JIS/data');
+  });
 });
