@@ -16,30 +16,30 @@ An open-source web map of Cambodia focused on **tourism** and **public transport
 
 ## Quick start
 
-Requires Node.js 20+ (22 recommended, see `.nvmrc`).
+Requires Node.js 20+ (22 recommended, see `.nvmrc`) and [pnpm](https://pnpm.io/installation) 10+ (`corepack enable` sets it up).
 
 ```bash
 git clone https://github.com/madaSKi-acz/JIS.git
 cd JIS
-npm install
+pnpm install
 cp .env.example .env
-npm run dev
+pnpm dev
 ```
 
 Then open http://localhost:5173.
 
-Map data is **not stored in this repo**. It is generated locally from OpenStreetMap (`npm run data:build`, coming in M1). See [data/README.md](data/README.md).
+Map data is **not stored in this repo**. It is generated locally from OpenStreetMap (`pnpm data:build`, coming in M1). See [data/README.md](data/README.md).
 
 ## Scripts
 
-| Command          | What it does                                                         |
-| ---------------- | -------------------------------------------------------------------- |
-| `npm run dev`    | Start the web app locally                                            |
-| `npm run build`  | Production build                                                     |
-| `npm test`       | Run tests (Vitest)                                                   |
-| `npm run lint`   | Lint with ESLint                                                     |
-| `npm run format` | Format with Prettier                                                 |
-| `npm run check`  | Everything CI runs: format, lint, typecheck, tests, large-file check |
+| Command       | What it does                                                         |
+| ------------- | -------------------------------------------------------------------- |
+| `pnpm dev`    | Start the web app locally                                            |
+| `pnpm build`  | Production build                                                     |
+| `pnpm test`   | Run tests (Vitest)                                                   |
+| `pnpm lint`   | Lint with ESLint                                                     |
+| `pnpm format` | Format with Prettier                                                 |
+| `pnpm check`  | Everything CI runs: format, lint, typecheck, tests, large-file check |
 
 ## Project structure
 

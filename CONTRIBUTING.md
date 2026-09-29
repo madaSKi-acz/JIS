@@ -12,18 +12,18 @@ Thank you for helping! អរគុណសម្រាប់ការចូលរ
 ## Setup
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env
-npm run dev
+pnpm dev
 ```
 
-`npm install` also sets up git hooks that format and lint your changes when you commit.
+`pnpm install` also sets up git hooks that format and lint your changes when you commit.
 
 ## Workflow
 
 1. Fork the repo and create a branch: `feat/tourism-popup`, `fix/khmer-font`, `docs/setup-km`
 2. Make your change. Keep PRs small and focused on one thing.
-3. Run `npm run check` — this is exactly what CI runs.
+3. Run `pnpm check` — this is exactly what CI runs.
 4. Open a pull request and fill in the template.
 
 ## Commit messages
@@ -42,7 +42,7 @@ Allowed types: `feat`, `fix`, `data`, `docs`, `style`, `refactor`, `perf`, `test
 ## Rules for data and large files
 
 - **Never commit map data.** Generated files go in `data/out/` and `apps/web/public/data/`, which are gitignored.
-- **No file over 10 MB.** CI fails if one is added (`npm run check:large-files`).
+- **No file over 10 MB.** CI fails if one is added (`pnpm check:large-files`).
 - If data is wrong or missing, fix it in OpenStreetMap. If our _filtering_ is wrong (e.g. a tag we should include), change the rules in `data/config/`.
 
 ## Code style

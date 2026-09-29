@@ -26,7 +26,7 @@ OpenStreetMap ──► Geofabrik Cambodia extract (.osm.pbf, ~50 MB)
 
 ## Workspaces
 
-The repo uses npm workspaces. Tooling (ESLint, Prettier, Vitest, TypeScript) is configured once at the root.
+The repo uses pnpm workspaces (`pnpm-workspace.yaml`). Tooling (ESLint, Prettier, Vitest, TypeScript) is configured once at the root.
 
 | Path       | Purpose                             |
 | ---------- | ----------------------------------- |

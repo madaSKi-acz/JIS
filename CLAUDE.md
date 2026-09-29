@@ -15,11 +15,12 @@ Open-source tourism and transport map of Cambodia on OpenStreetMap. See `README.
 
 ## Commands
 
-- `npm run check` — format, lint, typecheck, tests, large-file check (same as CI). Run before every push.
-- `npm run build` — production build of `apps/web`.
+- `pnpm check` — format, lint, typecheck, tests, large-file check (same as CI). Run before every push.
+- `pnpm build` — production build of `apps/web`.
 
 ## Conventions
 
+- Use pnpm (not npm or yarn). Add deps with `pnpm add` in the package that uses them.
 - Conventional Commits (`feat:`, `fix:`, `data:`, `docs:`, ...), enforced by commitlint.
 - Never commit map data or files over 10 MB; generated data lives in gitignored `data/out/` and `apps/web/public/data/`.
 - The app reads the data location from `VITE_DATA_URL`; never hardcode it.

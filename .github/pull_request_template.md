@@ -12,7 +12,7 @@
 
 ## Checklist
 
-- [ ] `npm run check` passes locally
+- [ ] `pnpm check` passes locally
 - [ ] No generated map data or files over 10 MB are committed
 - [ ] UI text is added to both Khmer and English translations (if it changes the UI)
 - [ ] Screenshots attached (if it changes the UI)

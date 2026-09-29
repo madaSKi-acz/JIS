@@ -16,14 +16,14 @@
 
 ## ចាប់ផ្តើម
 
-ត្រូវការ Node.js 20 ឡើងទៅ (ណែនាំ 22)។
+ត្រូវការ Node.js 20 ឡើងទៅ (ណែនាំ 22) និង [pnpm](https://pnpm.io/installation) 10 ឡើងទៅ។
 
 ```bash
 git clone https://github.com/madaSKi-acz/JIS.git
 cd JIS
-npm install
+pnpm install
 cp .env.example .env
-npm run dev
+pnpm dev
 ```
 
 បន្ទាប់មកបើក http://localhost:5173។
