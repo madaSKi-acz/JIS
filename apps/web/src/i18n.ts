@@ -15,7 +15,7 @@ const MESSAGES = {
   viewOnOsm: { km: 'មើល ឬកែនៅលើ OpenStreetMap', en: 'View or edit on OpenStreetMap' },
   unnamed: { km: 'គ្មានឈ្មោះ', en: 'Unnamed' },
   busLines: { km: 'ខ្សែឡានក្រុង', en: 'Bus lines' },
-  searchLines: { km: 'ស្វែងរកលេខ ឬឈ្មោះខ្សែ', en: 'Search by number or name' },
+  searchLines: { km: 'ស្វែងរកតាមលេខ ឬឈ្មោះខ្សែ', en: 'Search by number or name' },
   allLines: { km: '← ខ្សែទាំងអស់', en: '← All lines' },
   stops: { km: 'ចំណត', en: 'Stops' },
   noStops: {
@@ -26,7 +26,7 @@ const MESSAGES = {
   searchPlaces: { km: 'ស្វែងរកទីកន្លែង', en: 'Search places' },
   noPlacesFound: { km: 'រកមិនឃើញទីកន្លែង', en: 'No places found' },
   dataMissing: {
-    km: 'រកមិនឃើញទិន្នន័យផែនទី។ សូមដំណើរការ pnpm data:build ជាមុនសិន។',
+    km: 'រកមិនឃើញទិន្នន័យផែនទី។ សូមរត់ពាក្យបញ្ជា pnpm data:build ជាមុនសិន។',
     en: 'Map data not found. Run pnpm data:build first.',
   },
 } satisfies Record<string, Record<LabelLanguage, string>>;

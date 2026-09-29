@@ -8,6 +8,13 @@ All notable changes to this project are listed here. The format follows [Keep a 
 
 - **Place search**: find a place by its Khmer or English name, fly to it and open its popup.
 - **Category icons**: from zoom 14, places show as coloured markers with a Maki icon (temple, bed, bus, ferry, plane, ...) instead of plain dots.
+- **Focus on Cambodia**: the base map is faded outside the country so Thai and Vietnamese labels no longer compete with Cambodian ones.
+- **Data gaps checklist**: `pnpm data:build` also writes `data-gaps.md`, listing bus stops without a Khmer name and bus lines without stops, with links to fix them in OpenStreetMap. Published with the map at `/data/data-gaps.md`.
+- **Windows setup guide in Khmer**: [docs/setup.km.md](docs/setup.km.md).
+
+### Changed
+
+- Clearer Khmer wording for some categories and messages (តំបន់បេតិកភណ្ឌ, រមណីយដ្ឋាន, ខ្សែឡានក្រុង).
 
 ## [1.0.0] – 2026-09-29
 

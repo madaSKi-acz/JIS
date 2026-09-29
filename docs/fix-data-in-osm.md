@@ -24,6 +24,15 @@ All places on this map come from OpenStreetMap (OSM). If something is wrong or m
 
 Your change appears in our map the next time the data is rebuilt (Geofabrik updates daily).
 
+## What needs fixing
+
+Every data build writes a checklist of **bus stops without a Khmer name** and **bus lines without stops**, each with a link to OpenStreetMap:
+
+- Online: https://madaski-acz.github.io/JIS/data/data-gaps.md (refreshed every Monday)
+- Locally: `data/out/data-gaps.md` after `pnpm data:build`
+
+To add stops to a bus line, open its route relation in the iD editor and add each bus stop as a member with role `platform`, **in the order the bus visits them**. See the [public transport guide](https://wiki.openstreetmap.org/wiki/Public_transport).
+
 ## Community
 
 - OSM Cambodia and the [Humanitarian OpenStreetMap Team (HOT)](https://www.hotosm.org) organise mapping events.

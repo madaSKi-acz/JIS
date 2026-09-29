@@ -33,6 +33,8 @@ pnpm dev
 
 Then open http://localhost:5173. The map is in Khmer by default; use the **ខ្មែរ | EN** button at the top right to switch.
 
+On Windows? There is a step-by-step guide in Khmer: [docs/setup.km.md](docs/setup.km.md).
+
 Map data is **not stored in this repo**. `pnpm data:build` generates it locally from OpenStreetMap. See [data/README.md](data/README.md).
 
 ## Scripts
@@ -77,3 +79,4 @@ Found a wrong or missing place? Please fix it in OpenStreetMap: [docs/fix-data-i
 - **Map data:** © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/)
 - **Base map tiles:** [OpenFreeMap](https://openfreemap.org)
 - **Icons:** [Maki](https://github.com/mapbox/maki) by Mapbox, [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+- **Country boundary:** [Natural Earth](https://www.naturalearthdata.com/), public domain
