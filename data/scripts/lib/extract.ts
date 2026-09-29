@@ -98,15 +98,23 @@ export async function extractLayers(
   let skipped = 0;
 
   for (const { element, rule } of ways) {
-    const center = centerOf(coordsOfWay(element.id));
-    if (!center || !element.tags) {
+    const coords = coordsOfWay(element.id);
+    let geometry: Point | MultiLineString | undefined;
+    if (rule.kind === 'line') {
+      if (coords.length >= 2)
+        geometry = { type: 'MultiLineString', coordinates: [coords.map(roundCoord)] };
+    } else {
+      const center = centerOf(coords);
+      if (center) geometry = point(center);
+    }
+    if (!geometry || !element.tags) {
       skipped++;
       continue;
     }
     add(
       {
         type: 'Feature',
-        geometry: point(center),
+        geometry,
         properties: buildProperties(element, rule, element.tags),
       },
       rule,

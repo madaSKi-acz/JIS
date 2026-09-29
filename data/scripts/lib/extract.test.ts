@@ -19,6 +19,8 @@ function checkSample(result: ExtractResult) {
     'tourism/heritage': 1,
     'transport/bus_stop': 2,
     'transport/bus_route': 1,
+    'transport/ferry_route': 1,
+    'transport/railway': 1,
   });
   expect(result.skipped).toBe(1);
 
@@ -54,6 +56,19 @@ function checkSample(result: ExtractResult) {
     },
     properties: { category: 'bus_route', name: 'Line 1', ref: '1' },
   });
+  expect(byId(result, 'way/103')).toMatchObject({
+    geometry: {
+      type: 'MultiLineString',
+      coordinates: [
+        [
+          [104, 11],
+          [104.002, 11],
+        ],
+      ],
+    },
+    properties: { category: 'ferry_route', name: 'Mekong Crossing' },
+  });
+  expect(byId(result, 'way/105')).toBeUndefined();
   expect(byId(result, 'node/4')).toBeUndefined();
 }
 

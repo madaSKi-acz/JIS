@@ -39,6 +39,15 @@ describe('classify', () => {
     expect(classify({ type: 'node', tags: { type: 'route', route: 'bus' } })).toBeUndefined();
   });
 
+  it('only matches line rules for ways', () => {
+    expect(classify({ type: 'way', tags: { route: 'ferry' } })?.kind).toBe('line');
+    expect(classify({ type: 'way', tags: { railway: 'rail' } })?.category).toBe('railway');
+    expect(classify({ type: 'node', tags: { railway: 'rail' } })).toBeUndefined();
+    expect(classify({ type: 'relation', tags: { type: 'route', route: 'ferry' } })?.kind).toBe(
+      'route',
+    );
+  });
+
   it('ignores untagged elements', () => {
     expect(classify({ type: 'node' })).toBeUndefined();
   });

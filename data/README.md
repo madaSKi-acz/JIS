@@ -35,7 +35,7 @@ Other options: `--refresh` (always download), `--offline` (never download), `--m
 
 ## Output format
 
-Each layer is a GeoJSON `FeatureCollection`. Tourism places and stops are `Point`s; bus, ferry and train routes are `MultiLineString`s. Places mapped as areas are placed at the average of their outline.
+Each layer is a GeoJSON `FeatureCollection`. Tourism places and stops are `Point`s; routes, ferry crossings and railway tracks are `MultiLineString`s. Places mapped as areas are placed at the average of their outline.
 
 Feature properties:
 

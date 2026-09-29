@@ -36,6 +36,9 @@ export const SAMPLE: OsmElement[] = [
   },
   { type: 'way', id: 101, refs: [2, 20, 3], tags: { highway: 'primary' } },
   { type: 'way', id: 102, refs: [10, 11, 12, 13, 10] },
+  { type: 'way', id: 103, refs: [10, 11], tags: { route: 'ferry', name: 'Mekong Crossing' } },
+  { type: 'way', id: 104, refs: [12, 13], tags: { railway: 'rail' } },
+  { type: 'way', id: 105, refs: [11, 12], tags: { railway: 'abandoned' } },
   {
     type: 'relation',
     id: 1000,

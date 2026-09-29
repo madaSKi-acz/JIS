@@ -1,4 +1,4 @@
-import { LAYER_RULES, type LayerRule } from '../../config/layers.ts';
+import { LAYER_RULES, type GeometryKind, type LayerRule } from '../../config/layers.ts';
 import type { OsmElement, Tags } from './types.ts';
 
 function matches(rule: LayerRule, tags: Tags): boolean {
@@ -9,16 +9,18 @@ function matches(rule: LayerRule, tags: Tags): boolean {
   });
 }
 
-/**
- * Nodes, ways and multipolygon relations can only become points;
- * other relations can only become routes.
- */
+function allowedKinds(element: Pick<OsmElement, 'type' | 'tags'>): GeometryKind[] {
+  if (element.type === 'node') return ['point'];
+  if (element.type === 'way') return ['point', 'line'];
+  return element.tags?.type === 'multipolygon' ? ['point'] : ['route'];
+}
+
 export function classify(
   element: Pick<OsmElement, 'type' | 'tags'>,
   rules: LayerRule[] = LAYER_RULES,
 ): LayerRule | undefined {
   const tags = element.tags;
   if (!tags) return undefined;
-  const kind = element.type === 'relation' && tags.type !== 'multipolygon' ? 'route' : 'point';
-  return rules.find((rule) => rule.kind === kind && matches(rule, tags));
+  const kinds = allowedKinds(element);
+  return rules.find((rule) => kinds.includes(rule.kind) && matches(rule, tags));
 }

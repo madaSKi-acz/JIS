@@ -8,8 +8,12 @@
 
 export type LayerId = 'tourism' | 'transport';
 
-/** `point` features become map markers; `route` relations become lines. */
-export type GeometryKind = 'point' | 'route';
+/**
+ * - `point`: nodes, ways and multipolygon relations, shown as map markers
+ * - `line`: ways drawn as lines (ferry crossings, railway tracks)
+ * - `route`: route relations (e.g. a bus line made of many road segments)
+ */
+export type GeometryKind = 'point' | 'line' | 'route';
 
 export interface LayerRule {
   layer: LayerId;
@@ -85,6 +89,10 @@ export const LAYER_RULES: LayerRule[] = [
     kind: 'point',
     match: { aeroway: ['aerodrome'], iata: '*' },
   },
+
+  // --- transport: lines (single ways) ---
+  { layer: 'transport', category: 'ferry_route', kind: 'line', match: { route: ['ferry'] } },
+  { layer: 'transport', category: 'railway', kind: 'line', match: { railway: ['rail'] } },
 
   // --- transport: routes (relations with type=route) ---
   {
