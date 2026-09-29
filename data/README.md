@@ -12,7 +12,7 @@ This will:
 
 1. Download the Cambodia extract from [Geofabrik](https://download.geofabrik.de/asia/cambodia.html) to `data/raw/cambodia-latest.osm.pbf` (about 50 MB). It is skipped if the local copy is less than 7 days old.
 2. Keep only the features that match the rules in [`config/layers.ts`](config/layers.ts).
-3. Write `tourism.geojson`, `transport.geojson` and `meta.json` to `data/out/`.
+3. Write `tourism.geojson`, `transport.geojson`, `meta.json` and `data-gaps.md` (a checklist of bus stops without a Khmer name and bus lines without stops, to fix in OpenStreetMap) to `data/out/`.
 4. Copy them to `apps/web/public/data/`, where `pnpm dev` serves them at `/data`.
 
 Already downloaded the file yourself? Put it at `data/raw/cambodia-latest.osm.pbf`, or point to it:

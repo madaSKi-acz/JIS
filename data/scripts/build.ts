@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { CAMBODIA_PBF_URL, ensureDownloaded } from './lib/download.ts';
 import { extractLayers } from './lib/extract.ts';
+import { findDataGaps, gapsReport } from './lib/gaps.ts';
 import { pbfSource, readPbfTimestamp } from './lib/pbf.ts';
 
 const DATA_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -64,6 +65,7 @@ async function main() {
 
   await mkdir(OUT_DIR, { recursive: true });
   await mkdir(WEB_DATA_DIR, { recursive: true });
+  const gaps = findDataGaps(layers.transport);
   const files: Record<string, unknown> = {
     'tourism.geojson': layers.tourism,
     'transport.geojson': layers.transport,
@@ -74,10 +76,11 @@ async function main() {
       attribution: '© OpenStreetMap contributors (ODbL)',
       counts,
     },
+    'data-gaps.md': gapsReport(gaps, dataTimestamp),
   };
   for (const [name, content] of Object.entries(files)) {
     const outPath = join(OUT_DIR, name);
-    await writeFile(outPath, JSON.stringify(content));
+    await writeFile(outPath, typeof content === 'string' ? content : JSON.stringify(content));
     await copyFile(outPath, join(WEB_DATA_DIR, name));
   }
 
@@ -88,6 +91,10 @@ async function main() {
   if (skipped > 0)
     console.log(`${skipped} matched elements skipped (geometry outside the extract).`);
   console.log(`Wrote ${Object.keys(files).join(', ')} to data/out/ and apps/web/public/data/`);
+  console.log(
+    `\nTo fix in OpenStreetMap: ${gaps.routesWithoutStops.length} bus lines without stops, ` +
+      `${gaps.stopsWithoutKhmerName.length} bus stops without a Khmer name. See data/out/data-gaps.md`,
+  );
 }
 
 main().catch((err: unknown) => {
