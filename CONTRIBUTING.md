@@ -43,7 +43,7 @@ Allowed types: `feat`, `fix`, `data`, `docs`, `style`, `refactor`, `perf`, `test
 
 - **Never commit map data.** Generated files go in `data/out/` and `apps/web/public/data/`, which are gitignored.
 - **No file over 10 MB.** CI fails if one is added (`pnpm check:large-files`).
-- If data is wrong or missing, fix it in OpenStreetMap. If our _filtering_ is wrong (e.g. a tag we should include), change the rules in `data/config/`.
+- If data is wrong or missing, fix it in OpenStreetMap. If our _filtering_ is wrong (e.g. a tag we should include), change the rules in `data/config/layers.ts`.
 
 ## Code style
 

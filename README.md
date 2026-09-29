@@ -4,7 +4,7 @@
 
 An open-source web map of Cambodia focused on **tourism** and **public transport**, built on free [OpenStreetMap](https://www.openstreetmap.org) data. Started as a self-study project, built to grow, and open to contributions from the Khmer developer community.
 
-> Status: **v1 in progress** — foundation (M0) is done. See the [roadmap](docs/roadmap.md).
+> Status: **v1 in progress** — foundation (M0) and data pipeline (M1) are done. See the [roadmap](docs/roadmap.md).
 
 ## Features (v1 goal)
 
@@ -23,23 +23,25 @@ git clone https://github.com/madaSKi-acz/JIS.git
 cd JIS
 pnpm install
 cp .env.example .env
+pnpm data:build   # download + build map data (see data/README.md)
 pnpm dev
 ```
 
 Then open http://localhost:5173.
 
-Map data is **not stored in this repo**. It is generated locally from OpenStreetMap (`pnpm data:build`, coming in M1). See [data/README.md](data/README.md).
+Map data is **not stored in this repo**. `pnpm data:build` generates it locally from OpenStreetMap. See [data/README.md](data/README.md).
 
 ## Scripts
 
-| Command       | What it does                                                         |
-| ------------- | -------------------------------------------------------------------- |
-| `pnpm dev`    | Start the web app locally                                            |
-| `pnpm build`  | Production build                                                     |
-| `pnpm test`   | Run tests (Vitest)                                                   |
-| `pnpm lint`   | Lint with ESLint                                                     |
-| `pnpm format` | Format with Prettier                                                 |
-| `pnpm check`  | Everything CI runs: format, lint, typecheck, tests, large-file check |
+| Command           | What it does                                                         |
+| ----------------- | -------------------------------------------------------------------- |
+| `pnpm dev`        | Start the web app locally                                            |
+| `pnpm data:build` | Download OSM data and build the map layers                           |
+| `pnpm build`      | Production build                                                     |
+| `pnpm test`       | Run tests (Vitest)                                                   |
+| `pnpm lint`       | Lint with ESLint                                                     |
+| `pnpm format`     | Format with Prettier                                                 |
+| `pnpm check`      | Everything CI runs: format, lint, typecheck, tests, large-file check |
 
 ## Project structure
 
