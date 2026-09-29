@@ -1,6 +1,7 @@
 import {
   Popup,
   type DataDrivenPropertyValueSpecification,
+  type ExpressionSpecification,
   type GeoJSONSource,
   type Map as MapLibreMap,
   type MapMouseEvent,
@@ -44,12 +45,28 @@ export interface DataLayerOptions {
   onRouteClick?: (routeId: string) => void;
 }
 
+/** Route lines stay light at city zoom, where dozens of routes share the same roads. */
+const LINE_OPACITY: ExpressionSpecification = [
+  'interpolate',
+  ['linear'],
+  ['zoom'],
+  10,
+  0.35,
+  15,
+  0.85,
+];
+
 /** [layer, paint property, normal value, dimmed value] */
-type DimRule = [string, 'circle-opacity' | 'line-opacity' | 'text-opacity', number, number];
+type DimRule = [
+  string,
+  'circle-opacity' | 'line-opacity' | 'text-opacity',
+  number | ExpressionSpecification,
+  number,
+];
 
 function dimRules(g: GroupId): DimRule[] {
   return [
-    [lineLayer(g), 'line-opacity', 0.8, 0.12],
+    [lineLayer(g), 'line-opacity', LINE_OPACITY, 0.12],
     [clusterLayer(g), 'circle-opacity', 0.85, 0.2],
     [`${clusterLayer(g)}-count`, 'text-opacity', 1, 0.2],
     [pointLayer(g), 'circle-opacity', 1, 0.2],
@@ -77,8 +94,8 @@ export function addDataLayers(
       layout: { 'line-cap': 'round', 'line-join': 'round' },
       paint: {
         'line-color': categoryColor,
-        'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1.5, 14, 4],
-        'line-opacity': 0.8,
+        'line-width': ['interpolate', ['linear'], ['zoom'], 6, 1, 12, 2, 16, 4],
+        'line-opacity': LINE_OPACITY,
       },
     });
   }

@@ -49,7 +49,7 @@ Allowed types: `feat`, `fix`, `data`, `docs`, `style`, `refactor`, `perf`, `test
 
 - TypeScript with `strict` mode
 - Prettier formats everything; ESLint catches mistakes. Don't argue with the formatter.
-- Every user-visible string goes in the translation files (from M4), never hardcoded.
+- Every user-visible string goes in `apps/web/src/i18n.ts` (or `apps/web/src/layers/categories.ts` for category names) with both Khmer and English, never hardcoded.
 - Add tests for logic (data filtering, config, helpers). UI polish doesn't need tests.
 
 ## Code of Conduct

@@ -4,6 +4,7 @@ import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import khmerRegular from '@fontsource/noto-sans-khmer/files/noto-sans-khmer-khmer-400-normal.woff2?url';
 import khmerBold from '@fontsource/noto-sans-khmer/files/noto-sans-khmer-khmer-700-normal.woff2?url';
 import type { AppConfig } from '../config';
+import { LanguageSwitch } from '../ui/languageSwitch';
 import { khmerFontFaces, textFontNames } from './fonts';
 import { labelExpression, nameLabelLayerIds, type LabelLanguage } from './labels';
 
@@ -34,6 +35,7 @@ export function createMap(
     attributionControl: { compact: true },
   });
 
+  map.addControl(new LanguageSwitch(lang), 'top-right');
   map.addControl(new NavigationControl(), 'top-right');
   map.addControl(new ScaleControl(), 'bottom-left');
 

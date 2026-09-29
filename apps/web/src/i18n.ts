@@ -1,6 +1,11 @@
 import type { LabelLanguage } from './map/labels';
 
 const MESSAGES = {
+  appTitle: {
+    km: 'JIS – ផែនទីទេសចរណ៍ និងការដឹកជញ្ជូនកម្ពុជា',
+    en: 'JIS – Cambodia Tourism & Transport Map',
+  },
+  loading: { km: 'កំពុងផ្ទុកទិន្នន័យ…', en: 'Loading map data…' },
   layers: { km: 'ស្រទាប់ផែនទី', en: 'Map layers' },
   openingHours: { km: 'ម៉ោងបើក', en: 'Opening hours' },
   website: { km: 'គេហទំព័រ', en: 'Website' },

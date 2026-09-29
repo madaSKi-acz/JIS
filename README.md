@@ -4,7 +4,7 @@
 
 An open-source web map of Cambodia focused on **tourism** and **public transport**, built on free [OpenStreetMap](https://www.openstreetmap.org) data. Started as a self-study project, built to grow, and open to contributions from the Khmer developer community.
 
-> Status: **v1 in progress** — M0–M3 are done: data pipeline, base map, and tourism/transport layers with popups. See the [roadmap](docs/roadmap.md).
+> Status: **v1 in progress** — M0–M4 are done: data pipeline, base map, tourism/transport layers, bus lines, and the Khmer/English interface. See the [roadmap](docs/roadmap.md).
 
 ## Features (v1 goal)
 
@@ -28,7 +28,7 @@ pnpm data:build   # download + build map data (see data/README.md)
 pnpm dev
 ```
 
-Then open http://localhost:5173. Map labels are in Khmer by default; add `?lang=en` to the URL for English (a proper switch comes in M4).
+Then open http://localhost:5173. The map is in Khmer by default; use the **ខ្មែរ | EN** button at the top right to switch.
 
 Map data is **not stored in this repo**. `pnpm data:build` generates it locally from OpenStreetMap. See [data/README.md](data/README.md).
 
