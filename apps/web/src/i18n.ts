@@ -23,6 +23,8 @@ const MESSAGES = {
     en: 'This line has no stops mapped in OpenStreetMap yet.',
   },
   noLinesFound: { km: 'រកមិនឃើញខ្សែ', en: 'No lines found' },
+  searchPlaces: { km: 'ស្វែងរកទីកន្លែង', en: 'Search places' },
+  noPlacesFound: { km: 'រកមិនឃើញទីកន្លែង', en: 'No places found' },
   dataMissing: {
     km: 'រកមិនឃើញទិន្នន័យផែនទី។ សូមដំណើរការ pnpm data:build ជាមុនសិន។',
     en: 'Map data not found. Run pnpm data:build first.',

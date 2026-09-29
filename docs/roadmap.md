@@ -21,7 +21,7 @@
 
 ## Later (not in v1)
 
-Search, routing/directions (OSRM or Valhalla), a backend/database, offline mode, more countries.
+Routing/directions (OSRM or Valhalla), a backend/database, offline mode, more countries.
 
 **Connectivity layer.** Mobile towers (OpenCelliD, CC BY-SA), schools (OSM `amenity=school`) and measured internet speed (Ookla open data, non-commercial licence), with pulsing towers and schools coloured by speed or distance to the nearest tower. Tower-to-school links would not be drawn, since which tower serves which school is unknown.
 

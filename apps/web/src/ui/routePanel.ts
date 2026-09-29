@@ -3,22 +3,12 @@ import { t } from '../i18n';
 import type { PlaceFeature, RouteStop } from '../layers/data';
 import type { LabelLanguage } from '../map/labels';
 import { matchesQuery, routeSubtitle, routeTitle } from '../routes/routes';
+import { el } from './dom';
 import { displayName } from './popup';
 
 export interface RoutePanelCallbacks {
   onSelect(route: PlaceFeature | undefined): void;
   onStopClick(stop: RouteStop): void;
-}
-
-function el<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  className?: string,
-  text?: string,
-): HTMLElementTagNameMap[K] {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
 }
 
 export class RoutePanel implements IControl {

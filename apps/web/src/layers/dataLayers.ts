@@ -38,6 +38,8 @@ export interface DataLayers {
   setEnabledCategories(enabled: ReadonlySet<string>): void;
   /** Fades all data layers, e.g. while one bus route is highlighted on top. */
   setDimmed(dimmed: boolean): void;
+  /** Opens the place popup at the given point, e.g. for a search result. */
+  showPopup(props: PlaceProperties, at: [number, number]): void;
 }
 
 export interface DataLayerOptions {
@@ -164,9 +166,12 @@ export function addDataLayers(
     });
   }
 
-  addInteractions(map, lang, options);
+  const popup = addInteractions(map, lang, options);
 
   return {
+    showPopup(props, at) {
+      popup.setLngLat(at).setHTML(popupHtml(props, lang)).addTo(map);
+    },
     setEnabledCategories(enabled) {
       for (const { id: g } of GROUPS) {
         (map.getSource(pointsSource(g)) as GeoJSONSource).setData(
@@ -187,7 +192,7 @@ export function addDataLayers(
   };
 }
 
-function addInteractions(map: MapLibreMap, lang: LabelLanguage, options: DataLayerOptions) {
+function addInteractions(map: MapLibreMap, lang: LabelLanguage, options: DataLayerOptions): Popup {
   const popup = new Popup({ maxWidth: '300px', closeButton: true });
   // Checked in this order, so a marker wins over a route drawn underneath it.
   const clusters = GROUPS.map((g) => clusterLayer(g.id));
@@ -223,4 +228,5 @@ function addInteractions(map: MapLibreMap, lang: LabelLanguage, options: DataLay
     map.on('mouseenter', layer, () => (map.getCanvas().style.cursor = 'pointer'));
     map.on('mouseleave', layer, () => (map.getCanvas().style.cursor = ''));
   }
+  return popup;
 }
