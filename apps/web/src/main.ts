@@ -7,13 +7,16 @@ import { t } from './i18n';
 import { readStoredLanguage, resolveLanguage } from './language';
 import { addDataLayers } from './layers/dataLayers';
 import { countByCategory, DataNotFoundError, loadLayerData, type LayerData } from './layers/data';
+import { addMarkerImages } from './layers/icons';
 import { createMap } from './map/createMap';
 import type { LabelLanguage } from './map/labels';
 import { RouteHighlight } from './routes/routeHighlight';
 import { busRoutes, routeBounds } from './routes/routes';
+import { buildIndex } from './search/search';
 import { LayerPanel } from './ui/layerPanel';
 import { onePanelAtATimeOnPhones } from './ui/panels';
 import { RoutePanel } from './ui/routePanel';
+import { SearchPanel } from './ui/searchPanel';
 
 const config = loadConfig(import.meta.env);
 const lang: LabelLanguage = resolveLanguage(location.search, readStoredLanguage());
@@ -48,6 +51,13 @@ function setUpData(map: MapLibreMap, data: LayerData) {
   const highlight = new RouteHighlight(map, lang);
 
   map.addControl(
+    new SearchPanel(lang, buildIndex(data), ({ feature, coordinates }) => {
+      map.flyTo({ center: coordinates, zoom: Math.max(map.getZoom(), 16) });
+      layers.showPopup(feature.properties, coordinates);
+    }),
+    'top-left',
+  );
+  map.addControl(
     new LayerPanel(lang, countByCategory(data), (enabled) => layers.setEnabledCategories(enabled)),
     'top-left',
   );
@@ -63,7 +73,10 @@ if (container) {
   const loading = showMessage(t(lang, 'loading'), 'loading');
 
   Promise.all([loadLayerData(config.dataUrl), mapLoaded])
-    .then(([data]) => setUpData(map, data))
+    .then(async ([data]) => {
+      await addMarkerImages(map);
+      setUpData(map, data);
+    })
     .catch((err: unknown) => {
       console.error(err);
       showMessage(err instanceof DataNotFoundError ? t(lang, 'dataMissing') : String(err));

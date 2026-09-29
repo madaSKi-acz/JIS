@@ -6,6 +6,8 @@ export interface Category {
   id: string;
   group: GroupId;
   color: string;
+  /** Maki icon (github.com/mapbox/maki) drawn on the marker when zoomed in; points only. */
+  icon?: string;
   label: Record<LabelLanguage, string>;
 }
 
@@ -20,56 +22,77 @@ export const CATEGORIES: Category[] = [
     id: 'heritage',
     group: 'tourism',
     color: '#92400e',
+    icon: 'monument',
     label: { km: 'បេតិកភណ្ឌ', en: 'Heritage site' },
   },
-  { id: 'temple', group: 'tourism', color: '#ea580c', label: { km: 'វត្ត', en: 'Temple' } },
-  { id: 'museum', group: 'tourism', color: '#7c3aed', label: { km: 'សារមន្ទីរ', en: 'Museum' } },
+  {
+    id: 'temple',
+    group: 'tourism',
+    color: '#ea580c',
+    icon: 'religious-buddhist',
+    label: { km: 'វត្ត', en: 'Temple' },
+  },
+  {
+    id: 'museum',
+    group: 'tourism',
+    color: '#7c3aed',
+    icon: 'museum',
+    label: { km: 'សារមន្ទីរ', en: 'Museum' },
+  },
   {
     id: 'attraction',
     group: 'tourism',
     color: '#e11d48',
+    icon: 'attraction',
     label: { km: 'កន្លែងទេសចរណ៍', en: 'Attraction' },
   },
   {
     id: 'viewpoint',
     group: 'tourism',
     color: '#16a34a',
+    icon: 'viewpoint',
     label: { km: 'ទីកន្លែងមើលទេសភាព', en: 'Viewpoint' },
   },
   {
     id: 'accommodation',
     group: 'tourism',
     color: '#0d9488',
+    icon: 'lodging',
     label: { km: 'កន្លែងស្នាក់នៅ', en: 'Accommodation' },
   },
   {
     id: 'bus_stop',
     group: 'transport',
     color: '#2563eb',
+    icon: 'bus',
     label: { km: 'ចំណតឡានក្រុង', en: 'Bus stop' },
   },
   {
     id: 'bus_station',
     group: 'transport',
     color: '#1e40af',
+    icon: 'bus',
     label: { km: 'ស្ថានីយឡានក្រុង', en: 'Bus station' },
   },
   {
     id: 'train_station',
     group: 'transport',
     color: '#334155',
+    icon: 'rail',
     label: { km: 'ស្ថានីយរថភ្លើង', en: 'Train station' },
   },
   {
     id: 'ferry_terminal',
     group: 'transport',
     color: '#0284c7',
+    icon: 'ferry',
     label: { km: 'កំពង់ផែសាឡាង', en: 'Ferry terminal' },
   },
   {
     id: 'airport',
     group: 'transport',
     color: '#111827',
+    icon: 'airport',
     label: { km: 'អាកាសយានដ្ឋាន', en: 'Airport' },
   },
   {

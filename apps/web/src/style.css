@@ -149,6 +149,21 @@ body {
   font: inherit;
 }
 
+/* Place search */
+.search-form {
+  padding: 8px;
+}
+
+.search-results {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+.search-results[hidden] {
+  display: none;
+}
+
 .route-list,
 .route-stop-list {
   list-style: none;

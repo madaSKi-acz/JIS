@@ -13,6 +13,7 @@ An open-source web map of Cambodia focused on **tourism** and **public transport
 - Map of Cambodia with tourist attractions, hotels, temples, museums and viewpoints
 - Transport layer: bus stops, stations, ferry terminals, airports and bus routes
 - Pick a bus line to see its route and stops in order
+- Search places by name in Khmer or English
 - Khmer / English interface
 - Works on phone and desktop
 - Costs $0 to run locally
@@ -75,3 +76,4 @@ Found a wrong or missing place? Please fix it in OpenStreetMap: [docs/fix-data-i
 - **Code:** [MIT](LICENSE)
 - **Map data:** © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), available under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/)
 - **Base map tiles:** [OpenFreeMap](https://openfreemap.org)
+- **Icons:** [Maki](https://github.com/mapbox/maki) by Mapbox, [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
